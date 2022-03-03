@@ -1,0 +1,43 @@
+<div class="container">
+    <div clas"card card-body">
+        <h3>Add new catalog item</h3>
+        <form action="/catalog/saveEdit/_{{catalog.product_id}}?_method=PUT" method="post">
+            <input type="hidden" name="_method" value="PUT">
+            <div class="row mb-2">
+                <div class="col-lg-9">
+                    <div class="col-lg-3 mb-4">
+                        <input type="file" id="imageUpload" name="imageUpload" accept="image/png, image/jpeg, image/jpg, image/gif">
+                        <img id="image" src="/img/no-image.jpg" alt="" class="border img-thumbnail img-fluid" style="height:95%;width:100%;">
+                        <input id="product_imageURL" type="hidden" name="product_imageURL">
+                        <div class="font-weight-bold text-danger small" id="imageErr" style="display:none"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="product_name">Product Name</label>
+                        <input id="product_name" type="text" class="form-control" name="product_name" value="{{catalog.product_name}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product_desc">Product Description</label>
+                        <input id="product_desc" type="text" class="form-control" name="product_desc" value="{{catalog.product_desc}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product_price">Product Price</label>
+                        <input id="product_price" type="number" class="form-control" name="product_price" value="{{catalog.product_price}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product_stock">Available stock</label>
+                        <input id="product_stock" type="number" class="form-control" name="product_stock" value="{{catalog.product_stock}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product_supplier">Supplier</label>
+                        <input id="product_supplier" type="text" class="form-control" name="product_supplier" value="{{catalog.product_supplier}}" required>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+			<button type="submit" disabled style="display: none" aria-hidden="true"></button>
+			<input class="btn btn-outline-primary" type="submit" value="Save">
+        </form>
+    </div>
+</div>

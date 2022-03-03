@@ -1,0 +1,48 @@
+{{#if cart}}
+<h1 class='display-4' style='text-align:center;'>Your Cart</h1>
+
+<div class='container'>
+  <table id="cart_table" class="table table-borderless text-center" style="margin:auto;background-color:#d4d4d4">
+    <thead>
+      <th scope='col'>Product</th>
+      <th scope='col'>Unit Price</th>
+      <th scope='col'>Quantity</th>
+      <th scope='col'>Price</th>
+      <th scope='col'></th>
+      {{!-- <th scope='col'></th> --}}
+    </thead>
+    <tbody style="background-color: antiquewhite;">
+      <!-- this would list all the products that the user has added to cart-->
+      {{#each cart}}
+      <tr>
+        <td style="display:none;">{{this.product_id}}</td>
+        <td>{{this.product_name}}</td>
+        <td>{{this.product_price}}</td>
+        <td>{{this.quantity}}</td>
+        <td>${{this.items_price}}</td>
+        {{!-- <td>${{total_price}}</td> --}}
+        <td><a href="/cart/remove/{{this.product_id}}">Delete</a> </td>
+      </tr>
+      {{/each}}
+    </tbody>
+    <tfoot>
+        <td>Total: </td>
+        <td colspan="2"></td>
+        <td>${{cart_total}}</td>
+        <td></td>
+    </tfoot>
+  </table>
+  <div class="container text-center" style="width:90%;margin:auto;padding:20px;align-content: center;">
+    <h4>Grand total: ${{cart_total}}</h4>
+    <form action="/orders/submit" method="post" class="d-flex">
+      <input type="hidden" value="{{cart_total}}" id="cart_total" name="cart_total">
+      <button class="btn btn-primary" type="submit">Proceed to Payment</button>
+    </form>
+  </div>
+</div>
+{{else}}
+<h1 class="display-4" style="text-align: center;">No Items in Cart</h1>
+<div class="container" style="width:50%;margin:auto;padding:20px;align-content: center; text-align:center">
+    <a href="/catalog" style="font-size: 125%;">Return to Catalog</a>
+</div>
+{{/if}}

@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary mb-3">
+	<div class="container">
+		<a class="navbar-brand" href="/">Abc Supermarket</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+				  aria-expanded="false"
+				  aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav mt-1">
+				<li class="nav-item">
+					<a class="nav-link" href="/about">About</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/catalog">Catalog</a>
+				</li>
+				{{!-- the following will show when in catalog, and user.id == 1 --}}
+				{{#if is_admin}}
+				<li class="nav-item">
+					<a class="nav-link" href="/catalog/upload">Add to Catalog</a>
+				</li>
+				{{/if}}
+			</ul>
+			<ul class="navbar-nav ml-auto">
+				{{#if user}}
+					{{#if is_admin}}	
+					<li class="nav-item">
+						<a href="/refunds/showAll" class="nav-link">Refunds</a>
+					</li>
+					{{/if}}
+					<li class="nav-item">
+						<a href="/orders" class="nav-link">Orders</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink">Cart</a>
+						<div class="dropdown-menu">
+							<a href="/cart" class="dropdown-item">Show Cart</a>
+							<a href="/cart/showCheckout" class="dropdown-item">Checkout</a>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a href="/logout" class="nav-link">Logout</a>
+					</li>
+
+					<li class="nav-item">
+						<a href="/account" class="nav-link">{{user.name}}</a>
+					</li>
+				{{else}}
+					<li class="nav-item">
+						{{!-- main.js router(/login)--}}
+						<a href="/showLogin" class="nav-link">Login</a>
+					</li>
+					<li class="nav-item">
+						<a href="/showRegister" class="nav-link">Register</a>
+					</li>
+				{{/if}}
+			</ul>
+		</div>
+	</div>
+</nav>

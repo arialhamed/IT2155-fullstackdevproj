@@ -1,0 +1,103 @@
+<h1>Account</h1>
+<div class="rounded border">
+    <div class="container pb-2">
+        <div class="row mb-2">
+            <div class="col-md">
+                <h1 class="d-inline">
+                    <span class="material-icons">person</span>
+                    {{user.name}}
+                </h1>
+                <div class="btn-group ms-2">
+                    <button class="btn btn-primary align-middle" data-bs-toggle="modal" data-bs-target="#editNameModal">
+                        <span class="material-icons me-2">edit</span>Edit Name</button>
+                    <button class="btn btn-secondary align-middle" data-bs-toggle="modal" data-bs-target="#changePassModal">
+                        <span class="material-icons me-2">vpn_key</span>Change Password</button>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md">
+                <h3 class="d-inline">
+                    <span class="material-icons">email</span>
+                    {{user.email}}
+                </h3>
+                {{!<a class="btn btn-sm btn-success ms-2">
+                <span class="material-icons-outlined">edit</span>Edit</a>}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md">
+                <h3 class="d-inline">
+                    <span class="material-icons">home_work</span>
+                    {{userinfo.primary_address}}
+                </h3>
+                    <a class="btn btn-sm btn-secondary" href="/account/addresses">Change</a>
+            </div>
+            <div class="col-md">
+                <h3 class="d-inline">
+                    <span class="material-icons">payment</span>
+                    {{userinfo.primary_card}}
+                </h3>
+                    <a class="btn btn-sm btn-secondary" href="/account/cards">Change</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editNameModal" tabindex="-1">
+    <div class="modal-dialog">
+        <form action="/account/editName" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Name</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" name="newName" value="{{user.name}}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="changePassModal" tabindex="-1">
+    <div class="modal-dialog">
+        <form action="/account/changePassword" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" class="form-control" name="newPass1">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" class="form-control" name="newPass2">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Change Password</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    window.onload = function() {
+        document.getElementById("#sidebar-acc").classList.toggle("active");
+    };
+</script>

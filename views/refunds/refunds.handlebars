@@ -1,0 +1,55 @@
+<h1 class='display-4' style='text-align:center;'>Return/Refund</h1>
+<div class="container" style="width:50%;margin:auto;padding:20px;align-content: center;">
+    <form action="/refunds/request" method="POST" id="refunds">
+
+        <div class="form-group">
+            <label for="orderID">Order ID:</label>
+        <input class="form-control" type="text" id="order_id" name="order_id" value="{{order_id}}" required>
+        </div>
+        <div class="form-group">
+            <label for="reason">Reason:</label>
+        <input class="form-control" type="text" id="reason" name="reason" required>
+        </div>
+        <div class="form-group">
+            <label for="desc">Description/Reason for refund:</label>
+        <textarea class="form-control" id="description" name="description"></textarea>
+        </div>
+
+        <label for="image">Insert Image for Proof:</label>
+        <input id="file-input" type="file" accept="image/*" multiple>
+        <div id="preview"></div>
+            <script>
+                function previewImages() {
+                var preview = document.querySelector('#preview');
+                
+                if (this.files) {
+                    [].forEach.call(this.files, readAndPreview);
+                }
+                function readAndPreview(file) {
+                    // Make sure `file.name` matches our extensions criteria
+                    if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                    return alert(file.name + " is not an image");
+                    } // else...
+                    
+                    var reader = new FileReader();
+                    
+                    reader.addEventListener("load", function() {
+                    var image = new Image();
+                    image.height = 100;
+                    image.title  = file.name;
+                    image.src    = this.result;
+                    preview.appendChild(image);
+                    });
+                    
+                    reader.readAsDataURL(file);
+                    
+                }
+                }
+                document.querySelector('#file-input').addEventListener("change", previewImages);
+            </script>
+        </div>
+        <br>
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit">Submit Request</button>
+        </div>
+    </form>

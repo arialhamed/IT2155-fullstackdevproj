@@ -1,0 +1,17 @@
+<div class="min-vh-100 d-flex justify-content-center">
+    <div class="rounded border p-3 clearfix m-auto" style="max-width: 25rem;">
+        <div class="text-center">
+            <span class="fs-2">Enter your 2FA code</span>
+            <p>so we're sure it's you</p>
+        </div>
+        <form action="/auth/2fa" method="post">
+            <fieldset class="form-floating">
+                <input type="text" class="form-control" id="name" placeholder="2FA Code">
+                <label for="name">2FA Code</label>
+            </fieldset>
+            <div class="float-end mt-3">
+                <button type="submit" class="btn btn-primary float-end mt-3">Authenticate</button>
+            </div>
+        </form>
+    </div>
+</div>

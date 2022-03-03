@@ -1,0 +1,24 @@
+<div class="container">
+    <h1 class="text-center text-muted">All Refunds</h1>
+
+    <table class="table">
+        <tr>
+            <th scope="col">Refund ID</th>
+            <th scope="col">Order ID</th>
+            <th scope="col">User ID</th>
+            <th scope="col">Reason</th>
+            <th scope="col">Description</th>
+            <th scope="col">Action</th>
+        </tr>
+    {{#each refunds}}
+        <tr>
+            <th scope="row">{{this.refund_id}}</th>
+            <td>{{this.order_id}}</td>
+            <td>{{this.cart_id}}</td>
+            <td>{{this.reason}}</td>
+            <td>{{this.description}}</td>
+            <th><a href="#" style="color:green;">Accept</a>|<a href="#" style="color:red;">Decline</a></th>
+        </tr>
+    {{/each}}
+    </table>
+</div>

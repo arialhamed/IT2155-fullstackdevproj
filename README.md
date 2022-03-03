@@ -1,0 +1,2 @@
+.env file can be found in [here](https://docs.google.com/document/d/1hGc2u8eDVE8v9UHu3FXZHvovr9bx0c-wbRaSjjNG9P4/edit)
+Your own .env file may also work, I have set mine private for the sake of privacy (not my credentials)

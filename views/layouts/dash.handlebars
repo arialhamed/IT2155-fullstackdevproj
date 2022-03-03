@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    {{!--Google fonts Icon--}}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        #wrapper {
+            overflow-x: hidden;
+        }
+
+        #sidebar-wrapper {
+            min-height: 100vh;
+            margin-left: -15rem;
+            transition: margin 0.25s ease-out;
+        }
+
+        #sidebar-wrapper .sidebar-heading {
+            padding: 0.875rem 1.25rem;
+            font-size: 1.2rem;
+        }
+
+        #sidebar-wrapper .list-group {
+            width: 15rem;
+        }
+
+        #page-content-wrapper {
+            min-width: 100vw;
+        }
+
+        body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+            margin-left: 0;
+        }
+
+        @media (min-width: 768px) {
+            #sidebar-wrapper {
+                margin-left: 0;
+            }
+
+            #page-content-wrapper {
+                min-width: 0;
+                width: 100%;
+            }
+
+            body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+                margin-left: -15rem;
+            }
+        }
+    </style>
+
+    <title>Abc Supermarket</title>
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar-->
+        <div class="border-end bg-white" id="sidebar-wrapper">
+            <div class="sidebar-heading border-bottom text-light bg-primary">Abc Supermarket</div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" id="sidebar-acc"
+                    href="/account">Account</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" id="sidebar-card"
+                    href="/account/cards">Cards</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" id="sidebar-addr"
+                    href="/account/addresses">Addresses</a>
+                {{! <a class="list-group-item list-group-item-action list-group-item-light p-3" id="sidebar-2fa" href="/account/2FA">2FA</a>}}
+            </div>
+        </div>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+            <!-- Top navigation-->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary border-bottom">
+                <div class="container-fluid">
+                    <button class="btn btn-light me-2" id="sidebarToggle">Menu</button>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation"><span
+                            class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/about">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/catalog">Catalog</a>
+                            </li>
+                            {{!-- the following will show when in catalog, and user.id == 1 --}}
+                            {{#if is_admin}}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/catalog/upload">Add to Catalog</a>
+                            </li>
+                            {{/if}}
+                        </ul>
+                        <ul class="navbar-nav ms-auto">
+                            {{#if user}}
+                            {{#if is_admin}}
+                            <li class="nav-item">
+                                <a href="/refunds/showAll" class="nav-link">Refunds</a>
+                            </li>
+                            {{/if}}
+                            <li class="nav-item">
+                                <a href="/orders" class="nav-link">Orders</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                                    id="navbarDropdownMenuLink">Cart</a>
+                                <div class="dropdown-menu">
+                                    <a href="/cart" class="dropdown-item">Show Cart</a>
+                                    <a href="/cart/showCheckout" class="dropdown-item">Checkout</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/logout" class="nav-link">Logout</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">{{user.name}}</a>
+                            </li>
+                            {{else}}
+                            <li class="nav-item">
+                                {{!-- main.js router(/login)--}}
+                                <a href="/showLogin" class="nav-link">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/showRegister" class="nav-link">Register</a>
+                            </li>
+                            {{/if}}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Page content-->
+            <div class="container-fluid pt-3">
+                {{> _flashmsg}} {{!-- views/partials/_flashmsg.handlebars --}}
+                {{> _msg}} {{!-- views/partials/_msg.handlebars --}}
+                {{> _errors}} {{!-- views/partials/_errors.handlebars --}}
+                {{{body}}}
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+        integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+        integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous">
+    </script>
+    <script>
+        window.addEventListener('DOMContentLoaded', event => {
+
+            // Toggle the side navigation
+            const sidebarToggle = document.body.querySelector('#sidebarToggle');
+            if (sidebarToggle) {
+                // Uncomment Below to persist sidebar toggle between refreshes
+                // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+                //     document.body.classList.toggle('sb-sidenav-toggled');
+                // }
+                sidebarToggle.addEventListener('click', event => {
+                    event.preventDefault();
+                    document.body.classList.toggle('sb-sidenav-toggled');
+                });
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>

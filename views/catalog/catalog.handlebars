@@ -1,0 +1,38 @@
+
+<div class="dropdown ml-1 fixed">
+    <a class="btn btn-secondary dropdown-toggle" href="#" data-toggle="dropdown" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        {{sort_name}}
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><a class="dropdown-item" href="/catalog/sort/az_ASC">A - Z</a></li>
+        <li><a class="dropdown-item" href="/catalog/sort/az_DESC">Z - A</a></li>
+        <li><a class="dropdown-item" href="/catalog/sort/price_ASC">Lowest to Highest Price</a></li>
+        <li><a class="dropdown-item" href="/catalog/sort/price_DESC">Highest to Lowest Price</a></li>
+        <li><a class="dropdown-item" href="/catalog/sort/supplier_ASC">Supplier Name (A-Z)</a></li>
+        <li><a class="dropdown-item" href="/catalog/sort/supplier_DESC">Supplier Name (Z-A)</a></li>
+    </ul>
+</div>
+<div class="container bootstrap snippets">
+    <h1 class="text-center text-muted">Product catalog</h1>
+
+
+    <div class="row flow-offset-1">
+        {{#each catalog}}
+            <div class="col-xs-6 col-md-4">
+                <div class="product tumbnail thumbnail-3">
+                    <a href={{this.product_URL}}><img src={{this.product_imageURL}} alt="" style="width:100%"></a>
+                    <div class="caption">
+                        <h6>
+                            <a href={{this.product_URL}}>{{this.product_name}}</a>
+                            {{#if ../is_admin}}
+                            <a href="/catalog/edit/{{this.product_id}}" style="float:right;">Edit</a>
+                            {{/if}}
+                        </h6>
+                        <span class="price">${{this.product_price}}</span>
+                        <span style="float:right"> by: {{this.product_supplier}}</span>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
